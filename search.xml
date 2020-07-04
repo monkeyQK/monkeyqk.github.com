@@ -48,26 +48,6 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line">git remote add origin git@github.com:monkeyQK/monkeyqk.github.com #关联仓库</span><br><span class="line"></span><br><span class="line">git remote #查看仓库</span><br><span class="line"></span><br><span class="line">git remote -v #查看配置</span><br><span class="line"></span><br><span class="line">git clone https://github.com/github_username/repositories_name.git #从github复制到本地git</span><br><span class="line"></span><br><span class="line">git remote rm origin #删除默认</span><br><span class="line"></span><br><span class="line">git add . # 暂存需要添加的目录</span><br><span class="line"></span><br><span class="line">git add test.txt #暂存需要添加文件</span><br><span class="line"></span><br><span class="line">git commit -m “description” 提交到本地git</span><br><span class="line"></span><br><span class="line">git pull origin master # 同步代码到本地仓库</span><br><span class="line"></span><br><span class="line">git push origin master #从本地git提交到github</span><br><span class="line"></span><br><span class="line">git push origin master -f #强制提交</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>hexo添加标签和分类</title>
-    <url>/2019/03/31/hexo%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p>一、添加标签</p>
-<p>在blog目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>在blog/source目录下会新增tags目录，在目录中有index.md<br>编辑index.md文件</p>
-<p>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: “tags”</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>二、添加分类</p>
-<p>在blog目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>在blog/source目录下会新增categories目录，在目录中有index.md<br>编辑index.md文件<br>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo图文使用</title>
     <url>/2019/04/01/hexo%E5%9B%BE%E6%96%87%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>1.修改站点配置文件_config.yml文件</p>
@@ -86,6 +66,26 @@
 <p>需要修改 node_modules\hexo-asset-image\index.js</p>
 <p>可以修改配置  注释第24行，新增第25行</p>
 <p><img src="/2019/04/01/hexo图文使用/15.png" alt="图片描述"></p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo添加标签和分类</title>
+    <url>/2019/03/31/hexo%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p>一、添加标签</p>
+<p>在blog目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>在blog/source目录下会新增tags目录，在目录中有index.md<br>编辑index.md文件</p>
+<p>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: “tags”</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>二、添加分类</p>
+<p>在blog目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>在blog/source目录下会新增categories目录，在目录中有index.md<br>编辑index.md文件<br>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <tags>
         <tag>hexo</tag>
