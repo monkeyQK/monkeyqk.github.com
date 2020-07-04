@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo图文使用</title>
-    <url>/2019/04/01/hexo%E5%9B%BE%E6%96%87%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>1.修改站点配置文件_config.yml文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
-<p>2.安装插件，在hexo目录执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>3.新建文章同时会在source_posts新建同名的文件夹，把图片放在这个文件夹<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &quot;hexo图文使用&quot;</span><br></pre></td></tr></table></figure></p>
-<p>4.图片显示格式为如下格式，注意image目录名和文章名必须要一致。</p>
-<p>固定格式<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片描述](hexo图文使用/14.jpg)</span><br></pre></td></tr></table></figure></p>
-<p>在本例子中<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片描述](hexo图文使用/14.jpg)</span><br></pre></td></tr></table></figure></p>
-<p>使用后效果</p>
-<p><img src="/2019/04/01/hexo图文使用/14.jpg" alt="图片描述"></p>
-<p>5.假如以上设置后还是不显示图片</p>
-<p>说明hexo-asset-image配置中有 bug</p>
-<p>需要修改 node_modules\hexo-asset-image\index.js</p>
-<p>可以修改配置  注释第24行，新增第25行</p>
-<p><img src="/2019/04/01/hexo图文使用/15.png" alt="图片描述"></p>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>利用python发送服务器监测信息</title>
     <url>/2019/11/04/20191104/</url>
     <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import smtplib</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.mime.base import MIMEBase</span><br><span class="line">from email import encoders</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def _format_addr(s):</span><br><span class="line">    name, addr = parseaddr(s)</span><br><span class="line">    return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line">def mail_confing():</span><br><span class="line">    # 发送者邮箱</span><br><span class="line">    f = &apos;xxxxx@163.com&apos;</span><br><span class="line">    # 发送者邮箱授权码</span><br><span class="line">    p = &apos;xxxxx&apos;</span><br><span class="line">    # 接收者邮箱</span><br><span class="line">    t = [&apos;xxxxxx@qq.com&apos;]</span><br><span class="line">    return (f,p,t)</span><br></pre></td></tr></table></figure>
@@ -119,6 +95,30 @@
       <tags>
         <tag>vpn</tag>
         <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo图文使用</title>
+    <url>/2019/04/01/hexo%E5%9B%BE%E6%96%87%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>1.修改站点配置文件_config.yml文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+<p>2.安装插件，在hexo目录执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>3.新建文章同时会在source_posts新建同名的文件夹，把图片放在这个文件夹<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &quot;hexo图文使用&quot;</span><br></pre></td></tr></table></figure></p>
+<p>4.图片显示格式为如下格式，注意image目录名和文章名必须要一致。</p>
+<p>固定格式<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片描述](hexo图文使用/14.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>在本例子中<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片描述](hexo图文使用/14.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>使用后效果</p>
+<p><img src="/2019/04/01/hexo图文使用/14.jpg" alt="图片描述"></p>
+<p>5.假如以上设置后还是不显示图片</p>
+<p>说明hexo-asset-image配置中有 bug</p>
+<p>需要修改 node_modules\hexo-asset-image\index.js</p>
+<p>可以修改配置  注释第24行，新增第25行</p>
+<p><img src="/2019/04/01/hexo图文使用/15.png" alt="图片描述"></p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
