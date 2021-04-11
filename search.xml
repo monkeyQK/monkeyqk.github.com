@@ -1,53 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Redhat源码安装zabbix客户端</title>
-    <url>/2019/10/27/20191027/</url>
-    <content><![CDATA[<p>1、下载好源码安装包并上传到Redhat服务器上</p>
-<p>2、解压tar</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar  -xzf  zabbix-4.4.0.tar.gz</span><br></pre></td></tr></table></figure>
-<p>3、创建用户和组并创建安装目录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo groupadd zabbix</span><br><span class="line">sudo useradd -g zabbix zabbix</span><br><span class="line">sudo mkdir  /opt/zabbix-agent</span><br><span class="line">sudo chown  zabbix:zabbix /opt/zabbix-agent</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>4、编译安装<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd  zabbix-4.4.0</span><br><span class="line">./configure  --prefix=/opt/zabbix-agent --enable-agent</span><br></pre></td></tr></table></figure></p>
-<p>如果提示错误： configure: error: Unable to use libpcre (libpcre check failed)</p>
-<p>上传这个包到Redhat上并安装</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -Uvh pcre-devel-8.32-17.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-<p>重新编译<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure  --prefix=/opt/zabbix-agent --enable-agent</span><br></pre></td></tr></table></figure></p>
-<p>安装<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></p>
-<p>5、修改配置文件（有可能不是这个位置）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi /usr/local/zabbix-agent/etc/zabbix_agentd.conf</span><br></pre></td></tr></table></figure></p>
-<p>假如不是这个位置可通过以下命令查找<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">find / -name zabbix_agentd.conf</span><br></pre></td></tr></table></figure></p>
-<p>配置文件如下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LogFile=/var/logs/zabbix/zabbix_agentd.log</span><br><span class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line">#DebugLevel=3</span><br><span class="line">Server=XX.XX.XX.XXX</span><br><span class="line">#ListenPort=10050</span><br><span class="line">#ListenIP=0.0.0.0</span><br><span class="line">ServerActive=XX.XX.XX.XXX</span><br><span class="line">Hostname=XXXXX #与server端添加的主机名一致 </span><br><span class="line">#UnsafeUserParameters=0</span><br><span class="line">#Include=/usr/local/zabbix-agent/etc/zabbix_agentd.conf</span><br></pre></td></tr></table></figure></p>
-<p>6、添加日志写入权限<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir -p /var/log/zabbix/</span><br><span class="line">mkdir -p /var/run/zabbix/</span><br><span class="line">chown zabbix:zabbix /var/run/zabbix/</span><br><span class="line">chown zabbix:zabbix /var/log/zabbix/</span><br></pre></td></tr></table></figure></p>
-<p>7、添加zabbix-agent服务配置文件<br>cd /usr/lib/systemd/system/<br>新建zabbix-agent.service文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi zabbix-agent.service</span><br></pre></td></tr></table></figure>
-<p>配置如下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Zabbix Agent</span><br><span class="line">After=syslog.target</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Environment=&quot;CONFFILE=/usr/local/zabbix-agent/etc/zabbix_agentd.conf&quot;  #注意配置文件位置</span><br><span class="line">#EnvironmentFile=-/etc/sysconfig/zabbix-agent</span><br><span class="line">Type=forking</span><br><span class="line">Restart=on-failure</span><br><span class="line">PIDFile=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line">KillMode=control-group</span><br><span class="line">ExecStart=/usr/local/zabbix-agent/sbin/zabbix_agentd -c $CONFFILE  #注意程序位置</span><br><span class="line">ExecStop=/bin/kill -SIGTERM $MAINPID</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></p>
-<p>8、启动服务设置为开机启动<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start zabbix-agent.service</span><br><span class="line">systemctl enable zabbix-agent.service</span><br></pre></td></tr></table></figure></p>
+    <title>Hexo中添加本地文件下载</title>
+    <url>/2021/04/10/Hexo%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<p>1、调整程序配置文件_config.yml 里的post_asset_folder:这个选项设置为True</p>
+<p>2、在source下创建/download文件夹，先把文件复制到这个文件夹</p>
+<p>3、最后在xxxx.md中想引入下载链接时，只需要在xxxx.md中按照markdown的格式引入即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看实例  [点击下载](/download/hello.jpg)</span><br></pre></td></tr></table></figure>
+<p>查看实例  <a href="/download/hello.jpg">点击下载</a></p>
 ]]></content>
-      <tags>
-        <tag>zabbix</tag>
-        <tag>Redhat</tag>
-      </tags>
   </entry>
   <entry>
-    <title>git常用命令</title>
-    <url>/2020/07/04/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>配置用户名和邮箱<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;github_username&quot;</span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;邮箱地址&quot;</span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C &quot;邮箱地址&quot;</span><br><span class="line"></span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+    <title>hexo添加标签和分类</title>
+    <url>/2019/03/31/hexo%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p>一、添加标签</p>
+<p>在blog目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>在blog/source目录下会新增tags目录，在目录中有index.md<br>编辑index.md文件</p>
+<p>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: “tags”</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>常用操作<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line">git remote add origin git@github.com:github_Repositories#关联仓库</span><br><span class="line"></span><br><span class="line">git remote #查看仓库</span><br><span class="line"></span><br><span class="line">git remote -v #查看配置</span><br><span class="line"></span><br><span class="line">git clone https://github.com/github_username/repositories_name.git #从github复制到本地git</span><br><span class="line"></span><br><span class="line">git remote rm origin #删除默认</span><br><span class="line"></span><br><span class="line">git add . # 暂存需要添加的目录</span><br><span class="line"></span><br><span class="line">git add test.txt #暂存需要添加文件</span><br><span class="line"></span><br><span class="line">git commit -m “description” 提交到本地git</span><br><span class="line"></span><br><span class="line">git pull origin master # 同步代码到本地仓库</span><br><span class="line"></span><br><span class="line">git push origin master #从本地git提交到github</span><br><span class="line"></span><br><span class="line">git push origin master -f #强制提交</span><br></pre></td></tr></table></figure></p>
+<p>二、添加分类</p>
+<p>在blog目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>在blog/source目录下会新增categories目录，在目录中有index.md<br>编辑index.md文件<br>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用python发送服务器监测信息</title>
-    <url>/2019/11/04/20191104/</url>
-    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import smtplib</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.mime.base import MIMEBase</span><br><span class="line">from email import encoders</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def _format_addr(s):</span><br><span class="line">    name, addr = parseaddr(s)</span><br><span class="line">    return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line">def mail_confing():</span><br><span class="line">    # 发送者邮箱</span><br><span class="line">    f = &apos;xxxxx@163.com&apos;</span><br><span class="line">    # 发送者邮箱授权码</span><br><span class="line">    p = &apos;xxxxx&apos;</span><br><span class="line">    # 接收者邮箱</span><br><span class="line">    t = [&apos;xxxxxx@qq.com&apos;]</span><br><span class="line">    return (f,p,t)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def sendmail_by_163(f_type,f_path,f_name):</span><br><span class="line">    from_addr,password,to_addr = mail_confing()</span><br><span class="line">    msg = MIMEMultipart()</span><br><span class="line">    msg[&apos;From&apos;] = _format_addr(&apos;monkeyQK &lt;%s&gt;&apos; % from_addr)</span><br><span class="line">    msg[&apos;To&apos;] = _format_addr(&apos;管理员 &lt;%s&gt;&apos; % to_addr)</span><br><span class="line">    msg[&apos;Subject&apos;] = Header(&apos;服务器每日监测情况&apos;, &apos;utf-8&apos;).encode()</span><br><span class="line">    # 邮件正文是MIMEText:</span><br><span class="line">    msg.attach(MIMEText(&apos;Send by Python!&apos;, &apos;plain&apos;, &apos;utf-8&apos;))</span><br><span class="line"></span><br><span class="line">    # 添加附件就是加上一个MIMEBase，从本地读取一个文件:</span><br><span class="line">    with open(r&apos;&#123;&#125;&apos;.format(f_path), &apos;rb&apos;) as f:</span><br><span class="line">        # 设置附件的MIME和文件名，设置文件类型:</span><br><span class="line">        mime = MIMEBase(&apos;file&apos;, f_type, filename=f_name)</span><br><span class="line">        # 加上必要的头信息:</span><br><span class="line">        mime.add_header(&apos;Content-Disposition&apos;, &apos;attachment&apos;, filename=f_name)</span><br><span class="line">        mime.add_header(&apos;Content-ID&apos;, &apos;&lt;0&gt;&apos;)</span><br><span class="line">        mime.add_header(&apos;X-Attachment-Id&apos;, &apos;0&apos;)</span><br><span class="line">        # 把附件的内容读进来:</span><br><span class="line">        mime.set_payload(f.read())</span><br><span class="line">        # 用Base64编码:</span><br><span class="line">        encoders.encode_base64(mime)</span><br><span class="line">        # 添加到MIMEMultipart:</span><br><span class="line">        msg.attach(mime)</span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        # qq邮箱 需要使用465端口</span><br><span class="line">        # server = smtplib.SMTP_SSL(smtp_server, 465)</span><br><span class="line">        server = smtplib.SMTP(&apos;smtp.163.com&apos;)</span><br><span class="line">        server.login(from_addr,password)</span><br><span class="line">        server.sendmail(from_addr, to_addr, msg.as_string())</span><br><span class="line">        print(&apos;发送邮件成功！&apos;)</span><br><span class="line">        server.quit()</span><br><span class="line">    except smtplib.SMTPException as e:</span><br><span class="line">        print(&apos;error:&apos;,e) #打印错误</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    file_type=&apos;txt&apos;</span><br><span class="line">    file_path=&apos;E:/XXXX.txt&apos;</span><br><span class="line">    file_name=&apos;服务器每日监测信息.txt&apos;</span><br><span class="line">    sendmail_by_163(file_type,file_path,file_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>python</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -75,64 +55,21 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu搭建vpn (pptp)</title>
-    <url>/2020/06/04/vpn%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>一、安装vpn服务<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install pptpd</span><br></pre></td></tr></table></figure></p>
-<p>二、接下来配置pptpd服务</p>
-<p>主要有三个配置文件</p>
-<p>/etc/pptpd.conf</p>
-<p>/etc/ppp/pptpd-options</p>
-<p>/etc/ppp/chap-secrets</p>
-<a id="more"></a>
-<p>先修改pptpd.conf</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/pptpd.conf </span><br><span class="line"></span><br><span class="line">localip 自己服务器的IP</span><br><span class="line"></span><br><span class="line">remoteip 分配给客户端的IP 例192.168.8.150-238</span><br></pre></td></tr></table></figure>
-<p>在修改/etc/ppp/pptpd-options设置dns<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/ppp/pptpd-options </span><br><span class="line"></span><br><span class="line">ms-dns 8.8.8.8</span><br><span class="line"></span><br><span class="line">ms-dns 8.8.4.4</span><br></pre></td></tr></table></figure></p>
-<p>最后修改/etc/ppp/chap-secrets 用户配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/ppp/chap-secrets </span><br><span class="line"></span><br><span class="line">Secrets for authentication using CHAP</span><br><span class="line"></span><br><span class="line">client    server    secret    IP addresses</span><br><span class="line"></span><br><span class="line">用户名 （tab）  * （tab） 密码 （tab）（tab）    *</span><br></pre></td></tr></table></figure>
-<p>可以加多条</p>
-<p>注：第一个星是代表任意pptpd主机，如果有多台可以指定名称，第二个星是代表容许拨入的IP，客户端没有固定IP一般都是*</p>
-<p>修改内核参数<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br></pre></td></tr></table></figure></p>
-<p>去掉 “net.ipv4.ip_forward=1”前的注释号</p>
-<p>重新加载,提示net.ipv4.ip_forward = 1，说明配置生效<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo sysctl -p</span><br></pre></td></tr></table></figure></p>
-<p>重启pptpd服务重新加载修改的配置<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/etc/init.d/pptpd restart</span><br></pre></td></tr></table></figure></p>
-<p>完成上面的步骤已经可以拨入vpn但是不能访问外部网络。</p>
-<p>三、需要设置iptables进行NAT路由转换。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install iptables</span><br><span class="line"></span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.8.0/24 -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure></p>
-<p>保存设置<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iptables-save &gt; /etc/ufw/iptables.save</span><br></pre></td></tr></table></figure></p>
-<p>恢复设置，添加到开机启动<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc.rc.local</span><br><span class="line"></span><br><span class="line">iptables-restore &lt; /etc/ufw/iptables.save</span><br></pre></td></tr></table></figure></p>
-<p>查看iptables nat映射情况<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iptables  -t  nat  -nL</span><br></pre></td></tr></table></figure></p>
-<p>四、ufw配置 注：如果你是关闭ufw的这一步就不需要设置了<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/default/ufw</span><br><span class="line"></span><br><span class="line">DEFAULT_FORWARD_POLICY=&quot;ACCEPT&quot;  设置为ACCEPT打开状态</span><br></pre></td></tr></table></figure></p>
-<p>并且开放1723 47<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ufw allow 1723/tcp</span><br><span class="line"></span><br><span class="line">ufw allow 47/tcp</span><br><span class="line"></span><br><span class="line">vim /etc/ufw/before.rules  加入</span><br><span class="line"></span><br><span class="line">-A ufw-before-input -p 47 -j ACCEPT</span><br><span class="line">drop INVALID packets (logs these in loglevel medium and higher) #这行之前</span><br></pre></td></tr></table></figure></p>
-<p>重启ufw<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ufw disable</span><br><span class="line"></span><br><span class="line">ufw enable</span><br></pre></td></tr></table></figure></p>
-<p>五、vpn后远程SSH连接本vpn服务器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd-config</span><br></pre></td></tr></table></figure>
-<p>文件中的PermitRootLogin的值改为yes</p>
+    <title>哆啦A梦</title>
+    <url>/2021/04/11/%E5%93%86%E5%95%A6A%E6%A2%A6/</url>
+    <content><![CDATA[<p><a href="/download/002.jpg">点击下载</a></p>
 ]]></content>
       <categories>
-        <category>linux</category>
+        <category>CTF杂项</category>
       </categories>
-      <tags>
-        <tag>vpn</tag>
-        <tag>ubuntu</tag>
-      </tags>
   </entry>
   <entry>
-    <title>hexo添加标签和分类</title>
-    <url>/2019/03/31/hexo%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p>一、添加标签</p>
-<p>在blog目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>在blog/source目录下会新增tags目录，在目录中有index.md<br>编辑index.md文件</p>
-<p>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: “tags”</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>二、添加分类</p>
-<p>在blog目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>在blog/source目录下会新增categories目录，在目录中有index.md<br>编辑index.md文件<br>原始内容：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<p>修改内容为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">index: true</span><br><span class="line">date: 2019-03-31 23:09:37</span><br><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
+    <title>隐藏的钥匙</title>
+    <url>/2021/04/11/%E9%9A%90%E8%97%8F%E7%9A%84%E9%92%A5%E5%8C%99/</url>
+    <content><![CDATA[<p><a href="/download/001.jpg">点击下载</a></p>
 ]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
+      <categories>
+        <category>CTF杂项</category>
+      </categories>
   </entry>
 </search>
